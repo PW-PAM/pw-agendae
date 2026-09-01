@@ -1,0 +1,966 @@
+/* =====================================================
+   AgendaE — style.css v2
+   Topbar layout · #10A19A teal · #3686B7 azure · #0F172A navy
+   ===================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --teal:        #10A19A;
+  --teal-mid:    #0D8880;
+  --teal-deep:   #096B66;
+  --azure:       #3686B7;
+  --azure-deep:  #2A6D96;
+  --navy:        #0F172A;
+  --ink:         #1E293B;
+  --slate:       #475569;
+  --muted:       #94A3B8;
+  --ghost:       #CBD5E1;
+  --surface:     #F8FAFC;
+  --card:        #FFFFFF;
+  --border:      #E2E8F0;
+  --border-dark: #CBD5E1;
+
+  --teal-glow:   rgba(16,161,154,.14);
+  --azure-glow:  rgba(54,134,183,.12);
+
+  --r-sm: 8px;
+  --r-md: 12px;
+  --r-lg: 18px;
+  --r-xl: 24px;
+
+  --topbar-h: 72px;
+  --font-head: 'Outfit', system-ui, sans-serif;
+  --font-body: 'Space Grotesk', system-ui, sans-serif;
+}
+
+html, body {
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--ink);
+  background: var(--surface);
+  min-height: 100%;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* =====================================================
+   TOPBAR
+   ===================================================== */
+.agenda-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.agenda-sidebar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: var(--topbar-h);
+  background: var(--navy);
+  display: flex;
+  align-items: center;
+  padding: 0 32px;
+  z-index: 200;
+  gap: 0;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+
+/* brand */
+.brand-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-right: 48px;
+  flex-shrink: 0;
+}
+
+.brand-box img {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--r-sm);
+  object-fit: contain;
+}
+
+.brand-text h1 {
+  font-family: var(--font-head);
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  letter-spacing: -.3px;
+  line-height: 1;
+}
+
+.brand-text p { display: none; }
+
+/* nav — horizontal */
+.agenda-nav {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex: 1;
+}
+
+.agenda-nav a {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 16px;
+  border-radius: var(--r-sm);
+  color: rgba(255,255,255,.55);
+  font-size: .86rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background .16s, color .16s;
+  white-space: nowrap;
+}
+
+.agenda-nav a:hover {
+  background: rgba(255,255,255,.08);
+  color: rgba(255,255,255,.9);
+}
+
+.agenda-nav a.active {
+  background: rgba(16,161,154,.25);
+  color: #5CE8E2;
+  font-weight: 600;
+}
+
+.agenda-nav a::before { display: none; }
+
+/* =====================================================
+   MAIN — offset for topbar
+   ===================================================== */
+.agenda-main {
+  margin-top: var(--topbar-h);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* =====================================================
+   HERO — full-width banner
+   ===================================================== */
+.hero-box {
+  background: var(--navy);
+  padding: 40px 48px 56px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-box::before {
+  content: '';
+  position: absolute;
+  top: -80px; right: -80px;
+  width: 340px; height: 340px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(16,161,154,.22) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-box::after {
+  content: '';
+  position: absolute;
+  bottom: -60px; left: 30%;
+  width: 260px; height: 260px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(54,134,183,.16) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-box h2 {
+  font-family: var(--font-head);
+  font-size: 2rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  letter-spacing: -.5px;
+  line-height: 1.15;
+  margin-bottom: 8px;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-box p {
+  font-size: .9rem;
+  color: rgba(255,255,255,.55);
+  position: relative;
+  z-index: 1;
+}
+
+.top-actions {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+/* =====================================================
+   STAT CARDS — overlap hero slightly
+   ===================================================== */
+.agenda-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  padding: 0 48px;
+  margin-top: -28px;
+  position: relative;
+  z-index: 10;
+}
+
+.agenda-card {
+  background: var(--card);
+  border-radius: var(--r-lg);
+  padding: 22px 24px;
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 20px rgba(15,23,42,.08), 0 1px 3px rgba(15,23,42,.04);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: relative;
+  overflow: hidden;
+  transition: transform .2s, box-shadow .2s;
+}
+
+.agenda-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 28px rgba(15,23,42,.12);
+}
+
+.agenda-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--teal), var(--azure));
+}
+
+.agenda-card span {
+  font-size: .72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .7px;
+  color: var(--muted);
+}
+
+.agenda-card strong {
+  font-family: var(--font-head);
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--navy);
+  line-height: 1;
+  letter-spacing: -.5px;
+}
+
+/* =====================================================
+   PANEL / TABLE SECTION
+   ===================================================== */
+.agenda-panel {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-xl);
+  overflow: hidden;
+  margin: 24px 48px 48px;
+  box-shadow: 0 2px 12px rgba(15,23,42,.05);
+}
+
+.panel-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px 28px;
+  border-bottom: 1px solid var(--border);
+  flex-wrap: wrap;
+  gap: 14px;
+  background: var(--surface);
+}
+
+.panel-top h3 {
+  font-family: var(--font-head);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 2px;
+}
+
+.panel-top p {
+  font-size: .8rem;
+  color: var(--muted);
+}
+
+/* filter select */
+.form-field select {
+  padding: 8px 36px 8px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  background: var(--card);
+  color: var(--ink);
+  font-size: .84rem;
+  font-family: var(--font-body);
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2394A3B8' stroke-width='1.8' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  transition: border-color .16s;
+}
+
+.form-field select:focus {
+  outline: none;
+  border-color: var(--teal);
+}
+
+/* table */
+.table-wrapper { overflow-x: auto; }
+
+.agenda-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .875rem;
+}
+
+.agenda-table thead tr {
+  background: var(--surface);
+}
+
+.agenda-table th {
+  padding: 11px 20px;
+  text-align: left;
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .65px;
+  text-transform: uppercase;
+  color: var(--muted);
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+.agenda-table td {
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--border);
+  color: var(--slate);
+  vertical-align: middle;
+}
+
+.agenda-table tbody tr:last-child td { border-bottom: none; }
+
+.agenda-table tbody tr {
+  transition: background .12s;
+}
+
+.agenda-table tbody tr:hover {
+  background: rgba(16,161,154,.035);
+}
+
+.agenda-table td[colspan] {
+  text-align: center;
+  padding: 56px 20px;
+  color: var(--muted);
+  font-size: .9rem;
+}
+
+/* badges */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: .71rem;
+  font-weight: 700;
+  letter-spacing: .3px;
+  text-transform: uppercase;
+}
+
+.status-badge::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+  flex-shrink: 0;
+}
+
+.status-concluida {
+  background: rgba(16,161,154,.1);
+  color: var(--teal-deep);
+}
+
+.status-pendente {
+  background: rgba(54,134,183,.1);
+  color: var(--azure-deep);
+}
+
+/* =====================================================
+   BUTTONS
+   ===================================================== */
+.btn-primary,
+a.btn-primary,
+.btn-primary-concluir,
+.btn-primary-editar,
+.btn-primary-excluir,
+.btn-primary-desativar,
+.btn-primary-desabilitado,
+.btn-secondary,
+a.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: .82rem;
+  font-weight: 600;
+  border-radius: var(--r-sm);
+  padding: 8px 18px;
+  transition: all .16s;
+  text-decoration: none !important;
+  white-space: nowrap;
+  letter-spacing: .05px;
+  line-height: 1.4;
+}
+
+/* Primary */
+.btn-primary, a.btn-primary {
+  background: var(--teal);
+  color: #fff;
+  box-shadow: 0 2px 10px rgba(16,161,154,.3);
+}
+.btn-primary:hover, a.btn-primary:hover {
+  background: var(--teal-mid);
+  box-shadow: 0 4px 16px rgba(16,161,154,.4);
+  transform: translateY(-1px);
+  color: #fff;
+}
+
+/* Concluir */
+.btn-primary-concluir {
+  background: rgba(16,161,154,.1);
+  color: var(--teal-deep);
+  border: 1px solid rgba(16,161,154,.25);
+}
+.btn-primary-concluir:hover {
+  background: var(--teal);
+  color: #fff;
+  border-color: var(--teal);
+}
+
+/* Editar */
+.btn-primary-editar {
+  background: rgba(54,134,183,.08);
+  color: var(--azure-deep);
+  border: 1px solid rgba(54,134,183,.22);
+}
+.btn-primary-editar:hover {
+  background: var(--azure);
+  color: #fff;
+  border-color: var(--azure);
+}
+
+/* Excluir */
+.btn-primary-excluir {
+  background: rgba(220,50,50,.07);
+  color: #b83232;
+  border: 1px solid rgba(220,50,50,.2);
+}
+.btn-primary-excluir:hover {
+  background: #d94040;
+  color: #fff;
+  border-color: #d94040;
+}
+
+/* Desativar */
+.btn-primary-desativar {
+  background: rgba(200,120,40,.07);
+  color: #9a5e1a;
+  border: 1px solid rgba(200,120,40,.22);
+}
+.btn-primary-desativar:hover {
+  background: #c8843a;
+  color: #fff;
+  border-color: #c8843a;
+}
+
+/* Disabled */
+.btn-primary-desabilitado {
+  background: var(--surface);
+  color: var(--ghost);
+  border: 1px solid var(--border);
+  cursor: not-allowed;
+  opacity: .8;
+}
+
+/* Secondary */
+.btn-secondary, a.btn-secondary {
+  background: transparent;
+  color: var(--slate);
+  border: 1px solid var(--border);
+}
+.btn-secondary:hover, a.btn-secondary:hover {
+  background: var(--surface);
+  color: var(--ink);
+  border-color: var(--border-dark);
+}
+
+/* =====================================================
+   FORM PAGES
+   ===================================================== */
+.form-page {
+  max-width: 700px;
+}
+
+.agenda-form {
+  padding: 28px 32px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-field.full-width,
+.full-width {
+  grid-column: 1 / -1;
+}
+
+.form-field label {
+  font-size: .78rem;
+  font-weight: 600;
+  color: var(--slate);
+  letter-spacing: .2px;
+}
+
+.form-field input[type="text"],
+.form-field input[type="email"],
+.form-field input[type="password"],
+.form-field input[type="date"],
+.form-field textarea,
+.form-field select,
+.agenda-form .form-control,
+.agenda-form input[type="text"],
+.agenda-form input[type="email"],
+.agenda-form input[type="password"],
+.agenda-form input[type="date"],
+.agenda-form textarea,
+.agenda-form select {
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  background: var(--card);
+  color: var(--ink);
+  font-size: .875rem;
+  font-family: var(--font-body);
+  transition: border-color .16s, box-shadow .16s;
+  width: 100%;
+}
+
+.form-field input:focus,
+.form-field textarea:focus,
+.form-field select:focus,
+.agenda-form input:focus,
+.agenda-form textarea:focus,
+.agenda-form select:focus,
+.agenda-form .form-control:focus {
+  outline: none;
+  border-color: var(--teal);
+  box-shadow: 0 0 0 3px rgba(16,161,154,.1);
+}
+
+.form-field textarea,
+.agenda-form textarea {
+  resize: vertical;
+  min-height: 96px;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 28px;
+  padding-top: 22px;
+  border-top: 1px solid var(--border);
+}
+
+/* =====================================================
+   MODALS
+   ===================================================== */
+.modal-content {
+  border: none;
+  border-radius: var(--r-lg);
+  box-shadow: 0 20px 60px rgba(15,23,42,.2), 0 4px 16px rgba(15,23,42,.1);
+  overflow: hidden;
+}
+
+.modal-header {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 18px 24px;
+}
+
+.modal-title {
+  font-family: var(--font-head);
+  font-size: .98rem;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.modal-body {
+  padding: 22px 24px;
+  font-size: .9rem;
+  color: var(--slate);
+}
+
+.modal-footer {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  padding: 14px 24px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.modal .close {
+  color: var(--muted);
+  opacity: 1;
+  font-size: 1.5rem;
+  line-height: 1;
+}
+.modal .close:hover { color: var(--navy); }
+
+.modal-body .agenda-form { padding: 0; }
+.modal-body .form-field { margin-bottom: 14px; }
+.modal-body .modal-footer {
+  padding: 0;
+  margin-top: 20px;
+  border: none;
+  background: none;
+}
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+@media (max-width: 900px) {
+  .agenda-sidebar {
+    padding: 0 18px;
+    overflow-x: auto;
+  }
+
+  .brand-box { margin-right: 20px; }
+
+  .hero-box {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+    padding: 28px 24px 44px;
+  }
+
+  .agenda-cards { padding: 0 18px; }
+
+  .agenda-panel { margin: 20px 18px 32px; }
+
+  .form-grid { grid-template-columns: 1fr; }
+  .full-width, .form-field.full-width { grid-column: 1; }
+
+  .agenda-form { padding: 20px; }
+}
+
+@media (max-width: 600px) {
+  .hero-box h2 { font-size: 1.5rem; }
+  .agenda-cards { grid-template-columns: 1fr 1fr; }
+}
+
+/* =====================================================
+   AUTH PAGES — login, criar usuário, cadastro, etc.
+   Cole isso no final do seu style.css
+   ===================================================== */
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--navy);
+  padding: 32px;
+  position: relative;
+  overflow: hidden;
+}
+
+.auth-page::before {
+  content: '';
+  position: absolute;
+  top: -100px; right: -100px;
+  width: 340px; height: 340px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(16,161,154,.22) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.auth-page::after {
+  content: '';
+  position: absolute;
+  bottom: -80px; left: -60px;
+  width: 260px; height: 260px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(54,134,183,.18) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 420px;
+  background: var(--card);
+  border-radius: var(--r-xl);
+  box-shadow: 0 20px 60px rgba(15,23,42,.25), 0 4px 16px rgba(15,23,42,.1);
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+}
+
+.auth-card-header {
+  padding: 32px 32px 4px;
+}
+
+.auth-card-header h1 {
+  font-family: var(--font-head);
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--navy);
+  letter-spacing: -.3px;
+}
+
+.auth-card .agenda-form {
+  padding: 20px 32px 32px;
+}
+
+.auth-card .form-field {
+  margin-bottom: 16px;
+}
+
+.auth-card .form-actions {
+  border-top: none;
+  padding-top: 4px;
+  margin-top: 4px;
+  justify-content: stretch;
+}
+
+.auth-card .form-actions .btn-primary {
+  width: 100%;
+}
+
+.auth-footer {
+  text-align: center;
+  font-size: .82rem;
+  color: var(--slate);
+  padding: 0 32px 28px;
+}
+
+.auth-footer a {
+  color: var(--teal-deep);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.auth-footer a:hover { text-decoration: underline; }
+
+/* =====================================================
+   DASHBOARD — cabeçalho simples
+   ===================================================== */
+.dashboard-page {
+  min-height: 100vh;
+  background: var(--surface);
+}
+
+.dashboard-header {
+  background: var(--navy);
+  padding: 28px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dashboard-header h1 {
+  font-family: var(--font-head);
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -.4px;
+  margin: 0;
+}
+
+.dashboard-actions {
+  padding: 20px 48px;
+}
+
+@media (max-width: 600px) {
+  .dashboard-header,
+  .dashboard-actions {
+    padding: 20px 20px;
+  }
+}
+
+/* =====================================================
+   AUTH PAGES — login, criar usuário, cadastro, etc.
+   Cole isso no final do seu style.css
+   ===================================================== */
+   .auth-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--navy);
+    padding: 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .auth-page::before {
+    content: '';
+    position: absolute;
+    top: -100px; right: -100px;
+    width: 340px; height: 340px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(16,161,154,.22) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  
+  .auth-page::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: -60px;
+    width: 260px; height: 260px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(54,134,183,.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  
+  .auth-card {
+    width: 100%;
+    max-width: 420px;
+    background: var(--card);
+    border-radius: var(--r-xl);
+    box-shadow: 0 20px 60px rgba(15,23,42,.25), 0 4px 16px rgba(15,23,42,.1);
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .auth-card-header {
+    padding: 32px 32px 4px;
+  }
+  
+  .auth-card-header h1 {
+    font-family: var(--font-head);
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--navy);
+    letter-spacing: -.3px;
+  }
+  
+  .auth-card .agenda-form {
+    padding: 20px 32px 32px;
+  }
+  
+  .auth-card .form-field {
+    margin-bottom: 16px;
+  }
+  
+  .auth-card .form-actions {
+    border-top: none;
+    padding-top: 4px;
+    margin-top: 4px;
+    justify-content: stretch;
+  }
+  
+  .auth-card .form-actions .btn-primary {
+    width: 100%;
+  }
+  
+  .auth-footer {
+    text-align: center;
+    font-size: .82rem;
+    color: var(--slate);
+    padding: 0 32px 28px;
+  }
+  
+  .auth-footer a {
+    color: var(--teal-deep);
+    font-weight: 600;
+    text-decoration: none;
+  }
+  
+  .auth-footer a:hover { text-decoration: underline; }
+  
+  /* =====================================================
+     DASHBOARD — cabeçalho simples
+     ===================================================== */
+  .dashboard-page {
+    min-height: 100vh;
+    background: var(--surface);
+  }
+  
+  .dashboard-header {
+    background: var(--navy);
+    padding: 28px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .dashboard-header h1 {
+    font-family: var(--font-head);
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: -.4px;
+    margin: 0;
+  }
+  
+  .dashboard-actions {
+    padding: 20px 48px;
+  }
+  
+  @media (max-width: 600px) {
+    .dashboard-header,
+    .dashboard-actions {
+      padding: 20px 20px;
+    }
+  }
+  
+  /* =====================================================
+     LOGO — auth card e dashboard
+     ===================================================== */
+  .auth-card-header {
+    text-align: center;
+    padding-top: 32px;
+  }
+  
+  .auth-logo {
+    width: 72px;
+    height: 72px;
+    border-radius: var(--r-md);
+    object-fit: contain;
+  }
+  
+  .dashboard-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  .dashboard-brand img {
+    width: 44px;
+    height: 44px;
+    border-radius: var(--r-sm);
+    object-fit: contain;
+  }
